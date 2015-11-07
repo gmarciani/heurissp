@@ -18,7 +18,7 @@ Author's email: giacomo.marciani@gmail.com
 
 
 # BIBLIOGRAPHY
-"Subset Sum Problem" (3rd edition), A.Pacifici
+"Subset Sum Problem", A.Pacifici
 "Ricerca Operativa", (3rd edition), P.Serafini
 
 
@@ -35,27 +35,10 @@ SSP main view.
 A handy menu-based navigation will guide the user in the use of the app.
 
 
-# GRAMMAR ANALYSIS
-A grammar analysis is a complete report about the specified grammar.
-The following parameters are available:
- - axiom
- - epsilon;
- - non terminal alphabet
- - terminal alphabet
- - set of productions
- - grammar type (Chomsky hierarchy)
- - grammar extension (Extended/S-Extended/None)
- - grammar normal form (Chomsky/Greibach/None)
- - subset of epsilon productions
- - subset of unit productions
- - subset of non trivial unit productions
- - subset of trivial unit productions
- - subset of nullable symbols
- - subset of ungenerative symbols
- - subset of unreacheable symbols
- - subset of useless symbols
+# SSP RESOLUTION
+A SSP resolution is a complete fairness report about the specified sets and capacity.
 
-	(java -jar) gmparser.jar -a YOUR_GRAMMAR
+	(java -jar) ssp.jar -s SET_A SET_B CAPACITY
 
 
 # PARETO-OPTIMAL SOLUTIONS
@@ -63,16 +46,24 @@ The following Pareto-optimal determinations are available:
  - All Combinations (CMB)
  - Optimized Combinations (CMBO)
 
-	(java -jar) ssp.jar -t YOUR_TRANSFORMATION YOUR_GRAMMAR 
+	(java -jar) ssp.jar -p SET_A SET_B CAPACITY 
 
 
-# FAIRENESS
-The following faireness analysis are available:
- - Max-Min Faireness
- - Kalai-Smorodinski Faireness
- - Proportional Faireness
+# FAIRNESS ANALYSIS
+The following fairness analysis methods are available:
+ - Max-Min Fairness (MM)
+ - Kalai-Smorodinski Fairness (KS)
+ - Proportional Fairness (PR)
+ 
+Applying all fairness methods:
 
-	(java -jar) ssp.jar -s SET_A SET_B CAPACITY
+	(java -jar) ssp.jar -f PARETO_SOLUTIONS
+
+Or applying a specific fairness method:
+
+	(java -jar) ssp.jar -f --mm PARETO_SOLUTIONS
+	(java -jar) ssp.jar -f --ks PARETO_SOLUTIONS MAX_A MAX_B
+	(java -jar) ssp.jar -f --pr PARETO_SOLUTIONS
 
 
 # DOCUMENTATION
@@ -83,7 +74,7 @@ and interesting portions of code.
 To facilitate the code navigability, had been inserted bookmarks in correspondence 
 with the aforesaid portions (available by the Eclipse 'Bookmarks' view).
 
-JavaDocs available at http://gmarciani.com/project/gmparser/javadoc/index.html
+JavaDocs available at http://gmarciani.com/project/ssp/javadoc/index.html
 
 # TEST
 The tests were run on a 2 GHz Intel i5 with 2GB of RAM, running Linux Ubuntu 14.04 
