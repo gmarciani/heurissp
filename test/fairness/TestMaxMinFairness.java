@@ -1,14 +1,14 @@
-package faireness;
+package fairness;
 
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TestName;
 
-import control.Faireness;
+import control.Fairness;
 import model.Solution;
 
-public class TestMaxMinFaireness {
+public class TestMaxMinFairness {
 	
 	@Rule 
 	public TestName name = new TestName();
@@ -29,7 +29,7 @@ public class TestMaxMinFaireness {
 			new Solution(new int[] {3}, new int[] {4}),				
 		};
 		
-		Solution mmsol = Faireness.maxMin(sols);
+		Solution mmsol = Fairness.maxMin(sols);
 		
 		System.out.printf("Max-Min Faireness: %s\n", mmsol);
 	}

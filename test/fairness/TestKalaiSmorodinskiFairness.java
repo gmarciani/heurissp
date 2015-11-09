@@ -1,14 +1,14 @@
-package faireness;
+package fairness;
 
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TestName;
 
-import control.Faireness;
+import control.Fairness;
 import model.Solution;
 
-public class TestProportionalFaireness {
+public class TestKalaiSmorodinskiFairness {
 	
 	@Rule 
 	public TestName name = new TestName();
@@ -28,10 +28,12 @@ public class TestProportionalFaireness {
 				new Solution(new int[] {3}, new int[] {1}),
 				new Solution(new int[] {3}, new int[] {4}),				
 				};
+		int maxA = 3;
+		int maxB = 4;
 		
-		Solution psol = Faireness.proportional(sols);
+		Solution kssol = Fairness.kalaiSmorodinski(sols, maxA, maxB);
 		
-		System.out.printf("Proportional Faireness: %s\n", (psol != null)?psol:"none");
+		System.out.printf("Kalai-Smorodinski Faireness: %s\n", kssol);
 	}
 
 }

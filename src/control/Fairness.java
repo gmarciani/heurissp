@@ -2,7 +2,7 @@ package control;
 
 import model.Solution;
 
-public final class Faireness {
+public final class Fairness {
 	
 	public static final Solution maxMin(final Solution sols[]) {
 		int mmsol = 0;

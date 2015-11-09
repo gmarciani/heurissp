@@ -2,6 +2,8 @@ package model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.tuple.MutablePair;
 
@@ -25,6 +27,12 @@ public class Solution extends MutablePair<List<Integer>, List<Integer>> {
 		super.setRight(solBList);
 	}
 	
+	public Solution() {
+		super();
+		super.setLeft(new ArrayList<Integer>());
+		super.setRight(new ArrayList<Integer>());
+	}
+	
 	public List<Integer> getA() {
 		return super.getLeft();
 	}
@@ -43,6 +51,30 @@ public class Solution extends MutablePair<List<Integer>, List<Integer>> {
 			sum[1] += val;
 		
 		return sum;
+	}
+
+	public static Solution fromString(String str) {
+		Solution sol = new Solution();
+		String regex = "\\{\\[(\\d+(?:,\\d+)*)\\],\\[(\\d+(?:,\\d+)*)\\]\\}";
+		
+		Pattern ptrn = Pattern.compile(regex);
+		Matcher mtcr = ptrn.matcher(str);
+		
+		mtcr.find();
+		
+		String strA = mtcr.group(1);
+		String strB = mtcr.group(2);
+		
+		String strAvals[] = strA.split(",");
+		String strBvals[] = strB.split(",");
+		
+		for (String val : strAvals)
+			sol.getA().add(Integer.valueOf(val));
+		
+		for (String val : strBvals)
+			sol.getB().add(Integer.valueOf(val));
+		
+		return sol;
 	}
 
 }

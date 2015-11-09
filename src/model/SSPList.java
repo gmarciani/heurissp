@@ -23,4 +23,12 @@ public class SSPList extends ArrayList<Integer> {
 		return ssplist;
 	}
 
+	public static SSPList fromString(String str) {
+		SSPList list = new SSPList();
+		String[] values = str.split(",");
+		for (String value : values)
+			list.add(Integer.valueOf(value));
+		return list;
+	}
+
 }
