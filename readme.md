@@ -28,14 +28,14 @@ Author's email: giacomo.marciani@gmail.com
 
 
 # UPDATES
-GMParser updates available at https://github.com/gmarciani/ssp
+SSP updates available at https://github.com/gmarciani/ssp
 
 
 # EXECUTION
 Simply run the .jar with neither arguments nor options to access the 
 SSP main view.
 
-	(java -jar) ssp.jar
+	ssp
 
 A handy menu-based navigation will guide the user in the use of the app.
 
@@ -43,7 +43,11 @@ A handy menu-based navigation will guide the user in the use of the app.
 # SSP RESOLUTION
 A SSP resolution is a complete fairness report about the specified sets and capacity.
 
-	(java -jar) ssp.jar -s SET_A SET_B CAPACITY
+	ssp -s SET_A SET_B CAPACITY
+	
+i.e.:
+
+	ssp -s {1,2,3,4,5} {6,7,8,9,10} 15
 
 
 # PARETO-OPTIMAL SOLUTIONS
@@ -51,7 +55,11 @@ The following Pareto-optimal determinations are available:
  - All Combinations (CMB)
  - Optimized Combinations (CMBO)
 
-	(java -jar) ssp.jar -p SET_A SET_B CAPACITY 
+	ssp -p SET_A SET_B CAPACITY 
+	
+i.e.:
+	
+	ssp -p {1,2,3,4,5} {6,7,8,9,10} 15
 
 
 # FAIRNESS ANALYSIS
@@ -62,14 +70,12 @@ The following fairness analysis methods are available:
  
 Applying all fairness methods:
 
-	(java -jar) ssp.jar -f PARETO_SOLUTIONS
+	ssp -f PARETO_SOLUTIONS MAX_A MAX_B
+	
+i.e.:
 
-Or applying a specific fairness method:
-
-	(java -jar) ssp.jar -f --mm PARETO_SOLUTIONS
-	(java -jar) ssp.jar -f --ks PARETO_SOLUTIONS MAX_A MAX_B
-	(java -jar) ssp.jar -f --pr PARETO_SOLUTIONS
-
+	ssp -f {[1,2,3],[4,5,6]} {[7,8,9],[10,11,12]} 20 40	
+	
 
 # DOCUMENTATION
 The code is fully documented. 
@@ -80,6 +86,7 @@ To facilitate the code navigability, had been inserted bookmarks in corresponden
 with the aforesaid portions (available by the Eclipse 'Bookmarks' view).
 
 JavaDocs available at http://gmarciani.com/project/ssp/javadoc/index.html
+
 
 # TEST
 The tests were run on a 2 GHz Intel i5 with 2GB of RAM, running Linux Ubuntu 14.04 
