@@ -33,10 +33,7 @@ SSP updates available at https://github.com/gmarciani/ssp
 
 # EXECUTION
 Simply run the .jar with neither arguments nor options to access the 
-SSP main view.
-
-	ssp
-
+SSP main view. 
 A handy menu-based navigation will guide the user in the use of the app.
 
 
