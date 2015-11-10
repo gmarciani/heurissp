@@ -77,4 +77,9 @@ public class Solution extends MutablePair<List<Integer>, List<Integer>> {
 		return sol;
 	}
 
+	public static List<Solution> getAllPossibleSolutions(SSPList a) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

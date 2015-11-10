@@ -14,6 +14,8 @@ import model.Solution;
 
 import static org.fusesource.jansi.Ansi.*;
 
+import java.util.Collections;
+
 import view.AppOptions;
 
 public class App {
@@ -95,26 +97,37 @@ public class App {
 		this.quit();
 	}	
 	
-	public void solve(SSPList a, SSPList b, final int capacity) {
-		System.out.println(a);
-		System.out.println(b);
-		System.out.println(capacity);		
+	public void solve(final SSPList a, final SSPList b, final int c) {
+		Solution psols[] = this.pareto(a, b, c);
+		this.fairness(psols, Collections.max(a), Collections.max(b));		
 	}
 	
-	public void pareto(SSPList a, SSPList b, final int capacity) {
-		System.out.println(a);
-		System.out.println(b);
-		System.out.println(capacity);
+	public Solution[] pareto(final SSPList a, final SSPList b, final int c) {
+		this.getOutput().onResult("Computing the Pareto optimal solutions for the following SSP instance:");
+		this.getOutput().onResult(" * Set-A: " + a);
+		this.getOutput().onResult(" * Set-B: " + b);
+		this.getOutput().onResult(" * Capacity: " + c);
+		this.getOutput().onDefault(" ...");
+		this.getOutput().onResult("Computing the Pareto optimal solutions for the following SSP instance:");
+		
+		Solution psols[] = Pareto.getOptimalSolutions(a, b, c);
+		
+		for (int i = 1; i <= psols.length; i++)
+			this.getOutput().onResult("(" + i + ") " + psols[i - 1]);		
+		this.getOutput().onDefault("  .");
+		
+		return psols;
 	}
 	
-	public void fairness(Solution sols[], final int maxA, final int maxB) {
+	public Solution[] fairness(Solution sols[], final int maxA, final int maxB) {
 		this.getOutput().onResult("Computing the fairest solution in the following set of Pareto-optimal solutions:");
 		for (int i = 1; i <= sols.length; i++)
 			this.getOutput().onResult("(" + i + ") " + sols[i - 1]);
 		this.getOutput().onResult("With maximum value in A: " + maxA);
-		this.getOutput().onResult("With maximum value in B: " + maxB);
-		
+		this.getOutput().onResult("With maximum value in B: " + maxB);		
 		this.getOutput().onDefault(" ...");
+		
+		Solution fsols[] = new Solution[3];
 		
 		Solution solMaxMin = Fairness.maxMin(sols);
 		Solution solKalaiSmorodinski = Fairness.kalaiSmorodinski(sols, maxA, maxB);
@@ -123,8 +136,13 @@ public class App {
 		this.getOutput().onResult("Max-Min Fairness: " + solMaxMin);
 		this.getOutput().onResult("Kalai-Smorodinski Fairness: " + solKalaiSmorodinski);
 		this.getOutput().onResult("Proportional Fairness: " + solProportional);
-		
 		this.getOutput().onDefault("  .");
+		
+		fsols[0] = solMaxMin;
+		fsols[1] = solKalaiSmorodinski;
+		fsols[2] = solProportional;
+		
+		return fsols;
 	}
 	
 	public void help() {

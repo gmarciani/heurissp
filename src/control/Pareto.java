@@ -1,17 +1,21 @@
 package control;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import model.SSPList;
 import model.Solution;
 
-public class Solver {
+public class Pareto {	
 	
-	public Solver (SSPList a, SSPList b, int c) {
-		
-	}
+	private Pareto () {}
 
-	public Solution[] getParetoOptimalSolutions() {
-		// TODO Auto-generated method stub
-		return null;
+	public static Solution[] getOptimalSolutions(final SSPList a, final SSPList b, final int c) {
+		List<Solution> psols = new ArrayList<Solution>();
+
+		//
+		
+		return psols.toArray(new Solution[psols.size()]);
 	}
 	
 	public static int knapsack(int wt[], int W) {
