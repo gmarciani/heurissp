@@ -1,4 +1,4 @@
-package control;
+package view;
 
 import static org.fusesource.jansi.Ansi.*;
 
@@ -20,17 +20,17 @@ public class Output {
 	
 	public void onResult(String msg) {
 		String result = "[ssp] " + msg;
-		System.out.println(ansi().fg(App.RESULT_COLOR).a(result).reset());
+		System.out.println(ansi().fg(AppColor.RESULT_COLOR).a(result).reset());
 	}
 	
 	public void onWarning(String message) {
 		String warning = "[WARNING] " + message;
-		System.out.println(ansi().fg(App.WARNING_COLOR).a(warning).reset());
+		System.out.println(ansi().fg(AppColor.WARNING_COLOR).a(warning).reset());
 	}
 	
 	public void onException(String message) {
 		String warning = "[EXCEPTION] " + message;
-		System.out.println(ansi().fg(App.EXCEPTION_COLOR).a(warning).reset());
+		System.out.println(ansi().fg(AppColor.EXCEPTION_COLOR).a(warning).reset());
 	}
 	
 	public void onUnrecognizedArguments(String[] arguments) {

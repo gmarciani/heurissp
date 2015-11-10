@@ -5,7 +5,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TestName;
 
-import control.Fairness;
+import control.fairness.Fairness;
 import model.Solution;
 
 public class TestKalaiSmorodinskiFairness {

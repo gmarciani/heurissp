@@ -1,4 +1,4 @@
-package control;
+package control.pareto;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -7,8 +7,9 @@ import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 import org.fusesource.jansi.AnsiConsole;
-import org.fusesource.jansi.Ansi.Color;
 
+import control.fairness.Fairness;
+import control.pareto.Pareto;
 import model.SSPList;
 import model.Solution;
 
@@ -16,7 +17,9 @@ import static org.fusesource.jansi.Ansi.*;
 
 import java.util.Collections;
 
+import view.AppColor;
 import view.AppOptions;
+import view.Output;
 
 public class App {
 	
@@ -29,12 +32,6 @@ public class App {
 	public static final String VERS = "1.0.0";
 	
 	public static final String LOGO = "\n   ___|   ___|    _ \\ \n \\___ \\ \\___ \\   |   | \n       |      |  ___/ \n _____/ _____/  _|     \n\n";
-	
-	public static final Color LOGO_COLOR = Color.YELLOW;
-	public static final Color RESULT_COLOR = Color.GREEN;
-	public static final Color LOGON_COLOR = Color.CYAN;
-	public static final Color WARNING_COLOR = Color.YELLOW;
-	public static final Color EXCEPTION_COLOR = Color.RED;
 	
 	private static App instance;
 	
@@ -58,7 +55,7 @@ public class App {
 	}
 	
 	public void play(String[] args) {
-		System.out.println(ansi().fg(LOGO_COLOR).bold().a(LOGO).reset());
+		System.out.println(ansi().fg(AppColor.LOGO_COLOR).bold().a(LOGO).reset());
 		System.out.println(DESC + "\n");
 		CommandLineParser cmdParser = new DefaultParser();
 		CommandLine cmd = null;
