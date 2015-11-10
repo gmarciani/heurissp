@@ -5,6 +5,8 @@ import model.Solution;
 public final class Fairness {
 	
 	public static final Solution maxMin(final Solution sols[]) {
+		if (sols == null || sols.length == 0)
+			return null;
 		int mmsol = 0;
 		for (int i = 0; i < sols.length - 1; i++) {
 			int sum_i[] = sols[mmsol].getSum();
@@ -18,6 +20,8 @@ public final class Fairness {
 	}
 	
 	public static final Solution kalaiSmorodinski(final Solution sols[], final int maxA, final int maxB) {
+		if (sols == null || sols.length == 0)
+			return null;
 		int kssol = 0;
 		for (int i = 0; i < sols.length - 1; i++) {
 			int sum_i[] = sols[kssol].getSum();
@@ -30,7 +34,9 @@ public final class Fairness {
 		return sols[kssol];
 	}
 	
-	public static final Solution proportional(final Solution sols[]) {	
+	public static final Solution proportional(final Solution sols[]) {
+		if (sols == null || sols.length == 0)
+			return null;
 		boolean found = false;
 		int psol = 0;
 		for (int i = 0; i < sols.length - 1; i++) {

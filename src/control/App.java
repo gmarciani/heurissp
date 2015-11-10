@@ -108,7 +108,6 @@ public class App {
 		this.getOutput().onResult(" * Set-B: " + b);
 		this.getOutput().onResult(" * Capacity: " + c);
 		this.getOutput().onDefault(" ...");
-		this.getOutput().onResult("Computing the Pareto optimal solutions for the following SSP instance:");
 		
 		Solution psols[] = Pareto.getOptimalSolutions(a, b, c);
 		
@@ -133,9 +132,9 @@ public class App {
 		Solution solKalaiSmorodinski = Fairness.kalaiSmorodinski(sols, maxA, maxB);
 		Solution solProportional = Fairness.proportional(sols);
 		
-		this.getOutput().onResult("Max-Min Fairness: " + solMaxMin);
-		this.getOutput().onResult("Kalai-Smorodinski Fairness: " + solKalaiSmorodinski);
-		this.getOutput().onResult("Proportional Fairness: " + solProportional);
+		this.getOutput().onResult("Max-Min Fairness: " + ((solMaxMin == null)?"none":solMaxMin));
+		this.getOutput().onResult("Kalai-Smorodinski Fairness: " + ((solKalaiSmorodinski == null)?"none":solKalaiSmorodinski));
+		this.getOutput().onResult("Proportional Fairness: " + ((solProportional == null)?"none":solProportional));
 		this.getOutput().onDefault("  .");
 		
 		fsols[0] = solMaxMin;

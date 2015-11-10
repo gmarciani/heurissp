@@ -2,6 +2,8 @@ package model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class SSPList extends ArrayList<Integer> {
@@ -25,7 +27,15 @@ public class SSPList extends ArrayList<Integer> {
 
 	public static SSPList fromString(String str) {
 		SSPList list = new SSPList();
-		String[] values = str.split(",");
+		String regex = "\\{(\\d+(?:,\\d+)*)\\}";
+		
+		Pattern ptrn = Pattern.compile(regex);
+		Matcher mtcr = ptrn.matcher(str);
+		
+		mtcr.find();
+		
+		String strlist = mtcr.group(1);
+		String[] values = strlist.split(",");
 		for (String value : values)
 			list.add(Integer.valueOf(value));
 		return list;
