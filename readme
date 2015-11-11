@@ -12,9 +12,9 @@ SSP is a command-line based application that allows the user to
 solve the Subset-Sum Problem (SSP) with heuristic algorithms.
 Furthermore, it provides the following fairness analysis methods
 to evaluate the quality of Pareto-optimal solutions:
-* Max-Min Fairness
-* Kalai-Smorodinski Fairness
-* Proportional Fairness
+ * Max-Min Fairness
+ * Kalai-Smorodinski Fairness
+ * Proportional Fairness
 
 
 # AUTHOR
@@ -23,8 +23,8 @@ Author's email: giacomo.marciani@gmail.com
 
 
 # REFERENCES
-* "Subset Sum Problem", A.Pacifici
-* "Ricerca Operativa", (3rd edition), P.Serafini
+ * "Price of Fairness in two agents scenario and Subset Sum problems", 2014, G.Nicosia, A.Pacifici, U.Pferschy
+ * "Ricerca Operativa", 2009, P.Serafini
 
 
 # UPDATES
