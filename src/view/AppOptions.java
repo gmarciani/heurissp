@@ -8,9 +8,9 @@ public final class AppOptions extends Options {
 	
 	private static final long serialVersionUID = -5103529847964285801L;
 	
-	public static final String DESCRIPTION_SOLVE = "Solve the problem.";
-	public static final String DESCRIPTION_PARETO = "Computes Pareto-optimal solutions.";
-	public static final String DESCRIPTION_FAIRNESS = "Computes best faire solution.";
+	public static final String DESCRIPTION_SOLVE = "Solve the problem, giving Pareto optimal sum solutions and fairness analysis.";
+	public static final String DESCRIPTION_PARETO = "Computes Pareto optimal sum solutions.";
+	public static final String DESCRIPTION_FAIRNESS = "Computes the fairest sum solution.";
 	public static final String DESCRIPTION_HELP = "SSP helper.";
 	public static final String DESCRIPTION_VERSION = "SSP version.";
 	
@@ -38,7 +38,7 @@ public final class AppOptions extends Options {
 				.hasArgs()
 				.numberOfArgs(3)
 				.valueSeparator(' ')
-				.argName("SET-A SET-B CAPACITY")
+				.argName("LIST-A LIST-B CAPACITY")
 				.build();
 	}
 	
@@ -49,7 +49,7 @@ public final class AppOptions extends Options {
 				.hasArgs()
 				.numberOfArgs(3)
 				.valueSeparator(' ')
-				.argName("SET-A SET-B CAPACITY")
+				.argName("LIST-A LIST-B CAPACITY")
 				.build();
 	}
 	
@@ -59,7 +59,7 @@ public final class AppOptions extends Options {
 				.desc(AppOptions.DESCRIPTION_FAIRNESS)
 				.hasArgs()
 				.valueSeparator(' ')
-				.argName("PARETO_SOLUTIONS MAX_A MAX_B")
+				.argName("SUM_SOLUTIONS MAX_A MAX_B")
 				.build();
 	}
 	

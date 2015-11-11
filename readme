@@ -38,9 +38,9 @@ A handy menu-based navigation will guide the user in the use of the app.
 
 
 # SSP RESOLUTION
-A SSP resolution is a complete fairness report about the specified sets and capacity.
+A SSP resolution is a complete fairness report about the specified lists and capacity.
 In general:
-	ssp -s SET_A SET_B CAPACITY	
+	ssp -s LIST_A LIST_B CAPACITY	
 i.e.:
 	ssp -s {1,2,3,4,5} {6,7,8,9,10} 15
 
@@ -50,7 +50,7 @@ The following Pareto-optimal determinations are available:
 * All Combinations (CMB)
 * Optimized Combinations (CMBO)
 In general:
-	ssp -p SET_A SET_B CAPACITY	
+	ssp -p LIST_A LIST_B CAPACITY	
 i.e.:	
 	ssp -p {1,2,3,4,5} {6,7,8,9,10} 15
 
@@ -61,9 +61,9 @@ The following fairness analysis methods are available:
 * Kalai-Smorodinski Fairness (KS)
 * Proportional Fairness (PR) 
 In general:
-	ssp -f PARETO_SOLUTIONS MAX_A MAX_B	
+	ssp -f SUM_SOLUTIONS MAX_A MAX_B	
 i.e.:
-	ssp -f {[1,2,3],[4,5,6]} {[7,8,9],[10,11,12]} 20 40	
+	ssp -f {2,3} {8,16} 20 40	
 	
 
 # DOCUMENTATION
@@ -89,7 +89,7 @@ Proportional are available in folder /test.
 
 # LICENSE
 The MIT License (MIT)
-Copyright (c) 2015-2020 Giacomo Marciani
+Copyright (c) 2015 Giacomo Marciani
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
 in the Software without restriction, including without limitation the rights

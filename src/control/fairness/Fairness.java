@@ -1,60 +1,91 @@
 package control.fairness;
 
 import model.Solution;
+import model.SumSolution;
 
 public final class Fairness {
 	
 	public static final Solution maxMin(final Solution sols[]) {
 		if (sols == null || sols.length == 0)
 			return null;
-		int mmsol = 0;
-		for (int i = 0; i < sols.length - 1; i++) {
-			int sum_i[] = sols[mmsol].getSum();
-			int sum_j[] = sols[mmsol + 1].getSum();
-			int min_sum_i = (sum_i[0] <= sum_i[1]) ? sum_i[0] : sum_i[1];
-			int min_sum_j = (sum_j[0] <= sum_j[1]) ? sum_j[0] : sum_j[1];
-			mmsol = (min_sum_i >= min_sum_j) ? i : i + 1;
+		SumSolution sums[] = Solution.getSums(sols);
+		int sol_id = sum_maxMin(sums);
+		if (sol_id == -1)
+			return null;
+		return sols[sol_id];
+	}
+	
+	public static final int sum_maxMin(final SumSolution sums[]) {
+		if (sums == null || sums.length == 0)
+			return -1;
+		int sol = 0;
+		for (int i = 0; i < sums.length; i++) {
+			SumSolution sum_sol = sums[sol];
+			SumSolution sum_cur = sums[i];
+			int min_sum_sol = Math.min(sum_sol.getA(), sum_sol.getB());
+			int min_sum_cur = Math.min(sum_cur.getA(), sum_cur.getB());
+			sol = (min_sum_sol >= min_sum_cur) ? sol : i;
 		}
-		
-		return sols[mmsol];
+		return sol;
 	}
 	
 	public static final Solution kalaiSmorodinski(final Solution sols[], final int maxA, final int maxB) {
 		if (sols == null || sols.length == 0)
 			return null;
-		int kssol = 0;
-		for (int i = 0; i < sols.length - 1; i++) {
-			int sum_i[] = sols[kssol].getSum();
-			int sum_j[] = sols[kssol + 1].getSum();
-			int min_sum_i = (sum_i[0] / maxA <= sum_i[1] / maxB) ? sum_i[0] / maxA : sum_i[1] / maxB;
-			int min_sum_j = (sum_j[0] / maxA <= sum_j[1] / maxB) ? sum_j[0] / maxA : sum_j[1] / maxB;
-			kssol = (min_sum_i >= min_sum_j) ? i : i + 1;
+		SumSolution sums[] = Solution.getSums(sols);
+		int sol_id = sum_kalaiSmorodinski(sums, maxA, maxB);
+		if (sol_id == -1)
+			return null;
+		return sols[sol_id];
+	}
+	
+	public static final int sum_kalaiSmorodinski(final SumSolution sums[], final int maxA, final int maxB) {
+		if (sums == null || sums.length == 0)
+			return -1;
+		int sol = 0;
+		for (int i = 0; i < sums.length; i++) {
+			SumSolution sum_sol = sums[sol];
+			SumSolution sum_cur = sums[i];
+			int min_sum_sol = Math.min(sum_sol.getA() / maxA, sum_sol.getB() / maxB);
+			int min_sum_cur = Math.min(sum_cur.getA() / maxA, sum_cur.getB() / maxB);
+			sol = (min_sum_sol >= min_sum_cur) ? sol : i;
 		}
-		
-		return sols[kssol];
+		return sol;
 	}
 	
 	public static final Solution proportional(final Solution sols[]) {
 		if (sols == null || sols.length == 0)
 			return null;
+		SumSolution sums[] = Solution.getSums(sols);
+		int sol_id = sum_proportional(sums);
+		if (sol_id == -1)
+			return null;
+		return sols[sol_id];
+	}
+	
+	public static final int sum_proportional(final SumSolution sums[]) {
+		if (sums == null || sums.length == 0)
+			return -1;
 		boolean found = false;
-		int psol = 0;
-		for (int i = 0; i < sols.length - 1; i++) {
-			int sum_i[] = (found) ? sols[psol].getSum() : sols[i].getSum();
-			int sum_j[] = sols[i + 1].getSum();
-			if (sum_j[0] / sum_i[0] + sum_j[1] / sum_i[1] <= 2) {
-				psol = i;
-				found = true;
-			} else if (sum_i[0] / sum_j[0] + sum_i[1] / sum_j[1] <= 2) {
-				psol = i + 1;
-				found = true;
+		int sol = -1;	
+		for (int i = 0; i < sums.length - 1; i++) {
+			SumSolution sum_i = (found) ? sums[sol] : sums[i];
+			SumSolution sum_j = sums[i + 1];
+			if (sum_i.getA() != 0 && sum_i.getB() != 0) {
+				if (sum_j.getA() / sum_i.getA() + sum_j.getB() / sum_i.getB() <= 2) {
+					sol = i;
+					found = true;
+				}
+			}
+			if (sum_j.getA() != 0 && sum_j.getB() != 0) {
+				if (sum_i.getA() / sum_j.getA() + sum_i.getB() / sum_j.getB() <= 2) {
+					sol = i + 1;
+					found = true;
+				}
 			}
 		}
 		
-		if (!found)
-			return null;
-		
-		return sols[psol];
+		return sol;
 	}
 
 }

@@ -25,7 +25,7 @@ public class SSPList extends ArrayList<Integer> {
 		return ssplist;
 	}
 
-	public static SSPList fromString(String str) {
+	public static SSPList parse(final String str) {
 		SSPList list = new SSPList();
 		String regex = "\\{(\\d+(?:,\\d+)*)\\}";
 		

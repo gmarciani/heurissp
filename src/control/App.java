@@ -8,10 +8,12 @@ import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 import org.fusesource.jansi.AnsiConsole;
 
+import com.google.common.primitives.Ints;
+
 import control.fairness.Fairness;
 import control.pareto.Pareto;
 import model.SSPList;
-import model.Solution;
+import model.SumSolution;
 
 import static org.fusesource.jansi.Ansi.*;
 
@@ -67,25 +69,25 @@ public class App {
 		
 		if (cmd.hasOption("solve")) {
 			final String vals[] = cmd.getOptionValues("solve");
-			SSPList a = SSPList.fromString(vals[0]);
-			SSPList b = SSPList.fromString(vals[1]);
+			SSPList a = SSPList.parse(vals[0]);
+			SSPList b = SSPList.parse(vals[1]);
 			int capacity = Integer.valueOf(vals[2]);
 			this.solve(a, b, capacity);
 		} else if (cmd.hasOption("pareto")) {
 			final String vals[] = cmd.getOptionValues("pareto");	
-			SSPList a = SSPList.fromString(vals[0]);
-			SSPList b = SSPList.fromString(vals[1]);
+			SSPList a = SSPList.parse(vals[0]);
+			SSPList b = SSPList.parse(vals[1]);
 			int capacity = Integer.valueOf(vals[2]);
 			this.pareto(a, b, capacity);
 		} else if (cmd.hasOption("fairness")) {
 			final String vals[] = cmd.getOptionValues("fairness");
 			int nsols = vals.length - 2;
-			Solution sols[] = new Solution[nsols];
+			SumSolution sums[] = new SumSolution[nsols];
 			for (int n = 0; n < nsols; n ++)
-				sols[n] = Solution.fromString(vals[n]);
+				sums[n] = SumSolution.parse(vals[n]);
 			int maxA = Integer.valueOf(vals[vals.length - 2]);
 			int maxB = Integer.valueOf(vals[vals.length - 1]);
-			this.fairness(sols, maxA, maxB);
+			this.fairness(sums, maxA, maxB);
 		} else if (cmd.hasOption("help")) {
 			this.help();
 		} else if (cmd.hasOption("version")) {
@@ -94,49 +96,48 @@ public class App {
 		this.quit();
 	}	
 	
-	public void solve(final SSPList a, final SSPList b, final int c) {
-		Solution psols[] = this.pareto(a, b, c);
-		this.fairness(psols, Collections.max(a), Collections.max(b));		
+	public void solve(final SSPList listA, final SSPList listB, final int capacity) {
+		SumSolution sums[] = this.pareto(listA, listB, capacity);
+		this.fairness(sums, Collections.max(listA), Collections.max(listB));		
 	}
 	
-	public Solution[] pareto(final SSPList a, final SSPList b, final int c) {
-		this.getOutput().onResult("Computing the Pareto optimal solutions for the following SSP instance:");
-		this.getOutput().onResult(" * Set-A: " + a);
-		this.getOutput().onResult(" * Set-B: " + b);
-		this.getOutput().onResult(" * Capacity: " + c);
+	public SumSolution[] pareto(final SSPList listA, final SSPList listB, final int capacity) {
+		this.getOutput().onResult("Computing the Pareto optimal sum solutions for the following SSP instance:");
+		this.getOutput().onResult(" * List-A: " + listA);
+		this.getOutput().onResult(" * List-B: " + listB);
+		this.getOutput().onResult(" * Capacity: " + capacity);
 		this.getOutput().onDefault(" ...");
 		
-		Solution psols[] = Pareto.getOptimalSolutions(a, b, c);
+		SumSolution sums[] = Pareto.getOptimalSums(Ints.toArray(listA), Ints.toArray(listB), capacity);
 		
-		for (int i = 1; i <= psols.length; i++)
-			this.getOutput().onResult("(" + i + ") " + psols[i - 1]);		
+		for (int i = 0; i < sums.length; i++)
+			this.getOutput().onResult("(" + (i+1) + ") " + sums[i]);		
 		this.getOutput().onDefault("  .");
 		
-		return psols;
+		return sums;
 	}
 	
-	public Solution[] fairness(Solution sols[], final int maxA, final int maxB) {
-		this.getOutput().onResult("Computing the fairest solution in the following set of Pareto-optimal solutions:");
-		for (int i = 1; i <= sols.length; i++)
-			this.getOutput().onResult("(" + i + ") " + sols[i - 1]);
+	public SumSolution[] fairness(final SumSolution sums[], final int maxA, final int maxB) {
+		this.getOutput().onResult("Computing the fairest solution in the following set of sums:");
+		for (int i = 0; i < sums.length; i++)
+			this.getOutput().onResult("(" + (i+1) + ") " + sums[i]);
 		this.getOutput().onResult("With maximum value in A: " + maxA);
 		this.getOutput().onResult("With maximum value in B: " + maxB);		
-		this.getOutput().onDefault(" ...");
+		this.getOutput().onDefault(" ...");		
 		
-		Solution fsols[] = new Solution[3];
+		SumSolution sol_mm = sums[Fairness.sum_maxMin(sums)];
+		SumSolution sol_ks = sums[Fairness.sum_kalaiSmorodinski(sums, maxA, maxB)];
+		SumSolution sol_pr = sums[Fairness.sum_proportional(sums)];
 		
-		Solution solMaxMin = Fairness.maxMin(sols);
-		Solution solKalaiSmorodinski = Fairness.kalaiSmorodinski(sols, maxA, maxB);
-		Solution solProportional = Fairness.proportional(sols);
-		
-		this.getOutput().onResult("Max-Min Fairness: " + ((solMaxMin == null)?"none":solMaxMin));
-		this.getOutput().onResult("Kalai-Smorodinski Fairness: " + ((solKalaiSmorodinski == null)?"none":solKalaiSmorodinski));
-		this.getOutput().onResult("Proportional Fairness: " + ((solProportional == null)?"none":solProportional));
+		this.getOutput().onResult("Max-Min Fairness: " + ((sol_mm == null)?"none":sol_mm));
+		this.getOutput().onResult("Kalai-Smorodinski Fairness: " + ((sol_ks == null)?"none":sol_ks));
+		this.getOutput().onResult("Proportional Fairness: " + ((sol_mm == null)?"none":sol_pr));
 		this.getOutput().onDefault("  .");
 		
-		fsols[0] = solMaxMin;
-		fsols[1] = solKalaiSmorodinski;
-		fsols[2] = solProportional;
+		SumSolution fsols[] = new SumSolution[3];
+		fsols[0] = sol_mm;
+		fsols[1] = sol_ks;
+		fsols[2] = sol_pr;
 		
 		return fsols;
 	}

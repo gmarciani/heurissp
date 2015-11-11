@@ -22,7 +22,7 @@ public class TestSolution {
 	@Test
 	public void fromString() {
 		String strsol = "{[1,2,3],[4,5,6]}";
-		Solution sol = Solution.fromString(strsol);
+		Solution sol = Solution.parse(strsol);
 		System.out.println(sol);
 		
 		assertTrue("Solution should contain 1 in A", sol.getA().contains(1));
