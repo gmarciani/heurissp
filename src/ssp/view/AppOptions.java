@@ -1,4 +1,4 @@
-package view;
+package ssp.view;
 
 import org.apache.commons.cli.Option;
 import org.apache.commons.cli.OptionGroup;

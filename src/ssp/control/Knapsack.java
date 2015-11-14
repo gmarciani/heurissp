@@ -1,4 +1,4 @@
-package control.knapsack;
+package ssp.control;
 
 public final class Knapsack {
 	

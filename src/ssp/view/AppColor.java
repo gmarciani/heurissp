@@ -1,4 +1,4 @@
-package view;
+package ssp.view;
 
 import org.fusesource.jansi.Ansi.Color;
 

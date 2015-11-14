@@ -1,6 +1,6 @@
-package main;
+package ssp;
 
-import control.App;
+import ssp.control.App;
 
 public final class SSP {
 

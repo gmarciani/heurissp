@@ -5,8 +5,8 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TestName;
 
-import control.fairness.Fairness;
-import model.Solution;
+import ssp.control.Fairness;
+import ssp.model.Solution;
 
 public class TestKalaiSmorodinskiFairness {
 	

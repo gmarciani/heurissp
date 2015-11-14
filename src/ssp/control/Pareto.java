@@ -1,11 +1,10 @@
-package control.pareto;
+package ssp.control;
 
 import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import control.knapsack.Knapsack;
-import model.SumSolution;
+import ssp.model.SumSolution;
 
 public class Pareto {	
 	

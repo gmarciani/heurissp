@@ -1,7 +1,7 @@
-package control.fairness;
+package ssp.control;
 
-import model.Solution;
-import model.SumSolution;
+import ssp.model.Solution;
+import ssp.model.SumSolution;
 
 public final class Fairness {
 	

@@ -1,4 +1,4 @@
-package view;
+package ssp.view;
 
 import static org.fusesource.jansi.Ansi.*;
 

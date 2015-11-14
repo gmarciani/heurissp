@@ -1,4 +1,4 @@
-package control;
+package ssp.control;
 
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
@@ -10,18 +10,15 @@ import org.fusesource.jansi.AnsiConsole;
 
 import com.google.common.primitives.Ints;
 
-import control.fairness.Fairness;
-import control.pareto.Pareto;
-import model.SSPList;
-import model.SumSolution;
+import ssp.model.SSPList;
+import ssp.model.SumSolution;
+import ssp.view.AppColor;
+import ssp.view.AppOptions;
+import ssp.view.Output;
 
 import static org.fusesource.jansi.Ansi.*;
 
 import java.util.Collections;
-
-import view.AppColor;
-import view.AppOptions;
-import view.Output;
 
 public class App {
 	
