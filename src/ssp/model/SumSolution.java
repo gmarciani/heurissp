@@ -5,19 +5,19 @@ import java.util.regex.Pattern;
 
 public class SumSolution {
 	
-	private int sumA;
-	private int sumB;
+	private float sumA;
+	private float sumB;
 	
-	public SumSolution(final int sumA, final int sumB) {
+	public SumSolution(final float sumA, final float sumB) {
 		this.sumA = sumA;
 		this.sumB = sumB;
 	}
 	
-	public int getA() {
+	public float getA() {
 		return this.sumA;
 	}
 	
-	public int getB() {
+	public float getB() {
 		return this.sumB;
 	}
 	

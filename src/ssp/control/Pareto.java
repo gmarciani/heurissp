@@ -15,8 +15,9 @@ public class Pareto {
 		int c = capacity;
 		while (c >= 0) {
 			int sumA = Knapsack.getMaxSum(a, c);
-			int sumB = Knapsack.getMaxSum(b, c - sumA);
-			sums.add(new SumSolution(sumA, sumB));
+			int sumB = Knapsack.getMaxSum(b, capacity - sumA);
+			SumSolution sum = new SumSolution(sumA, sumB);
+			sums.add(sum);
 			c--;
 		}		
 		Set<SumSolution> doms = getDominants(sums);
