@@ -18,8 +18,6 @@ import ssp.view.Output;
 
 import static org.fusesource.jansi.Ansi.*;
 
-import java.util.Collections;
-
 public class App {
 	
 	public static final String NAME = "SSP";
@@ -95,7 +93,15 @@ public class App {
 	
 	public void solve(final SSPList listA, final SSPList listB, final int capacity) {
 		SumSolution sums[] = this.pareto(listA, listB, capacity);
-		this.fairness(sums, Collections.max(listA), Collections.max(listB));		
+		float max_sum_A = 0;
+		float max_sum_B = 0;
+		for (SumSolution sum : sums) {
+			if (sum.getA() >= max_sum_A)
+				max_sum_A = sum.getA();
+			if (sum.getB() >= max_sum_B)
+				max_sum_B = sum.getB();
+		}
+		this.fairness(sums, max_sum_A, max_sum_B);		
 	}
 	
 	public SumSolution[] pareto(final SSPList listA, final SSPList listB, final int capacity) {
@@ -114,7 +120,7 @@ public class App {
 		return sums;
 	}
 	
-	public SumSolution[] fairness(final SumSolution sums[], final int maxA, final int maxB) {
+	public SumSolution[] fairness(final SumSolution sums[], final float maxA, final float maxB) {
 		this.getOutput().onResult("Computing the fairest solution in the following set of sums:");
 		for (int i = 0; i < sums.length; i++)
 			this.getOutput().onResult("(" + (i+1) + ") " + sums[i]);

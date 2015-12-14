@@ -29,7 +29,7 @@ public final class Fairness {
 		return sol;
 	}
 	
-	public static final Solution kalaiSmorodinski(final Solution sols[], final int maxA, final int maxB) {
+	public static final Solution kalaiSmorodinski(final Solution sols[], final float maxA, final float maxB) {
 		if (sols == null || sols.length == 0)
 			return null;
 		SumSolution sums[] = Solution.getSums(sols);
@@ -39,7 +39,7 @@ public final class Fairness {
 		return sols[sol_id];
 	}
 	
-	public static final int sum_kalaiSmorodinski(final SumSolution sums[], final int maxA, final int maxB) {
+	public static final int sum_kalaiSmorodinski(final SumSolution sums[], final float maxA, final float maxB) {
 		if (sums == null || sums.length == 0)
 			return -1;
 		int sol = 0;
