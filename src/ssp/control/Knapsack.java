@@ -2,7 +2,7 @@ package ssp.control;
 
 public final class Knapsack {
 	
-	public static int getMaxSum(int weights[], int capacity) {
+	public static float getMaxSum(int weights[], int capacity) {
 		if (capacity == 0)
 			return 0;
 		

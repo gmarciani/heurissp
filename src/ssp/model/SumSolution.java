@@ -1,9 +1,11 @@
 package ssp.model;
 
+import java.util.Objects;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class SumSolution {
+public class SumSolution implements Comparable<SumSolution> {
 	
 	private float sumA;
 	private float sumB;
@@ -19,11 +21,19 @@ public class SumSolution {
 	
 	public float getB() {
 		return this.sumB;
-	}
+	}	
 	
-	@Override
-	public String toString() {
-		return "{" + this.sumA + "," + this.sumB + "}";
+	public static boolean isDominated(final SumSolution sum, final Set<SumSolution> sums) {
+		for (SumSolution other_sum : sums) {
+			if (sum.equals(other_sum))
+				continue;
+			if (sum.getA() == other_sum.getA() && sum.getB() < other_sum.getB())
+				return true;
+			if (sum.getB() == other_sum.getB() && sum.getA() < other_sum.getA())
+				return true;
+		}
+		
+		return false;
 	}
 	
 	public static SumSolution parse(final String str) {
@@ -38,6 +48,34 @@ public class SumSolution {
 		int sumB = Integer.valueOf(mtcr.group(2));
 		
 		return new SumSolution(sumA, sumB);
+	}
+
+	@Override
+	public int compareTo(SumSolution other) {
+		if (this.getA() > other.getA())
+			return 1;
+		else if (this.getA() < other.getA())
+			return -1;
+		else
+			return Double.compare(this.getB(), other.getB());
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (this.getClass() != obj.getClass())
+			return false;
+		SumSolution other = (SumSolution) obj;
+		return this.getA() == other.getA() && this.getB() == other.getB();
+	}
+	
+	@Override
+	public int hashCode() {
+		return Objects.hash(this.getA(), this.getB());
+	}
+	
+	@Override
+	public String toString() {
+		return "{" + this.sumA + "," + this.sumB + "}";
 	}
 
 }
