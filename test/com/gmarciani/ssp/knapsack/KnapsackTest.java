@@ -1,8 +1,8 @@
-package knapsack;
+package com.gmarciani.ssp.knapsack;
 
 import org.junit.Test;
 
-import ssp.control.Knapsack;
+import com.gmarciani.ssp.control.Knapsack;
 
 public class KnapsackTest {
 

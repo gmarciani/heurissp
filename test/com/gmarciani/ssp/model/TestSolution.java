@@ -1,4 +1,4 @@
-package model;
+package com.gmarciani.ssp.model;
 
 import static org.junit.Assert.*;
 
@@ -7,13 +7,13 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TestName;
 
-import ssp.model.Solution;
+import com.gmarciani.ssp.model.Solution;
 
 public class TestSolution {
-	
-	@Rule 
+
+	@Rule
 	public TestName name = new TestName();
-	
+
 	@Before
 	public void testInfo() {
 		System.out.println("\n/********************************************************************************");
@@ -26,7 +26,7 @@ public class TestSolution {
 		String strsol = "{[1,2,3],[4,5,6]}";
 		Solution sol = Solution.parse(strsol);
 		System.out.println(sol);
-		
+
 		assertTrue("Solution should contain 1 in A", sol.getA().contains(1));
 		assertTrue("Solution should contain 2 in A", sol.getA().contains(2));
 		assertTrue("Solution should contain 3 in A", sol.getA().contains(3));

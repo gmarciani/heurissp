@@ -1,13 +1,13 @@
-package fairness;
+package com.gmarciani.ssp.fairness;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class)
-@SuiteClasses({ 
+@SuiteClasses({
 	TestMaxMinFairness.class,
-	TestKalaiSmorodinskiFairness.class,	 
+	TestKalaiSmorodinskiFairness.class,
 	TestProportionalFairness.class })
 public class AllTestsFairness {
 
