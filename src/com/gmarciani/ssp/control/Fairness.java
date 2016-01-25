@@ -78,20 +78,15 @@ public final class Fairness {
 			SumSolution sum_j = sums[i + 1];
 			if (delList.contains(sum_i) || delList.contains(sum_j))
 				continue;
-			System.out.println("sum_i: " + sum_i);
-			System.out.println("sum_j: " + sum_j);
 			if (sum_i.getA() != 0 && sum_i.getB() != 0) {
 				if (sum_j.getA() / sum_i.getA() + sum_j.getB() / sum_i.getB() <= 2.0) {
-					System.out.println("i è ok");
 					if (!found) {
 						sol = i;
 						found = true;				
-						System.out.println("found true");
 					}
 				} else {
 					if (found) {
 						found = false;
-						System.out.println("found false");
 						delList.add(sum_i);
 					}
 				}
@@ -100,10 +95,8 @@ public final class Fairness {
 
 			if (sum_j.getA() != 0 && sum_j.getB() != 0) {
 				if (sum_i.getA() / sum_j.getA() + sum_i.getB() / sum_j.getB() <= 2.0) {
-					System.out.println("j è ok");
 					sol = i + 1;
 					found = true;
-					System.out.println("found true");
 				} else {
 					delList.add(sum_j);
 				}
@@ -111,8 +104,6 @@ public final class Fairness {
 			
 			if (!found)
 				sol = -1;
-			
-			System.out.println("sol: " + ((sol!=-1)?sums[sol]:"none"));
 		}
 
 		return sol;
